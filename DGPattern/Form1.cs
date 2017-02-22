@@ -23,7 +23,8 @@ namespace DGPattern
         double[] heightB;
         double[] heightC;
         double[] heightD;
-        double elevation;
+        double viewElevation;
+        double viewAzimuth;
         int numTowers;
         int tower;
         double[] directionalmagnitude;
@@ -41,7 +42,8 @@ namespace DGPattern
             heightB = new double[100];
             heightC = new double[100];
             heightD = new double[100];
-            elevation = 0;
+            viewElevation = 0;
+            viewAzimuth = 0;
             numTowers = 1;
             tower = 1;
             ratio[1] = 1;
@@ -215,7 +217,7 @@ namespace DGPattern
             {
                 Double scrollValue = 900 - (double.Parse(txtTheta.Text) * 10);
                 ThetaScrollBar.Value = (int) scrollValue;
-                elevation = double.Parse(txtTheta.Text);
+                viewElevation = double.Parse(txtTheta.Text);
             }
             catch
             {
@@ -256,15 +258,17 @@ namespace DGPattern
             double maxy = 0;
             Series pattern = new Series("Pattern");
             Series zoomandenhance = new Series("Zoom and Enhance");
+            Series verticalPattern = new Series("Vertical Pattern");
             pattern.ChartType = SeriesChartType.Polar;
             zoomandenhance.ChartType = SeriesChartType.Polar;
+            verticalPattern.ChartType = SeriesChartType.Polar;
             
             if (highPrecision)
             {
                 for (int i = 0; i < 3600; i++)
                 {
                     double azimuth = ((double)i)/10;
-                    directionalmagnitude[i] = DirectionalResult(azimuth, elevation);
+                    directionalmagnitude[i] = DirectionalResult(azimuth, viewElevation);
                     if (directionalmagnitude[i] > maxy)
                     {
                         maxy = directionalmagnitude[i];
@@ -282,17 +286,29 @@ namespace DGPattern
                 for (int i = 0; i < 360; i++)
                 {
                     double azimuth = i;
-                    directionalmagnitude[i] = DirectionalResult(azimuth, elevation);
+                    directionalmagnitude[i] = DirectionalResult(azimuth, viewElevation);
                     if (directionalmagnitude[i] > maxy)
                     {
                         maxy = directionalmagnitude[i];
+                        //txtAzimuth.Text = azimuth.ToString();
                     }
                     DataPoint point = new DataPoint(azimuth, directionalmagnitude[i]);
                     pattern.Points.Add(point);
                     DataPoint zoompoint = new DataPoint(azimuth, directionalmagnitude[i] * 10);
                     zoomandenhance.Points.Add(zoompoint);
                     System.Diagnostics.Debug.WriteLine(directionalmagnitude[i].ToString());
-
+                    if (azimuth <= 90) 
+                    {
+                        double elevation = 90 - azimuth;
+                        DataPoint verticalpoint = new DataPoint(azimuth, DirectionalResult(viewAzimuth, elevation));
+                        verticalPattern.Points.Add(verticalpoint);
+                    }
+                    else if (azimuth >= 270)
+                    {
+                        double elevation = azimuth - 270;
+                        DataPoint verticalpoint = new DataPoint(azimuth, DirectionalResult(viewAzimuth + 180, elevation));
+                        verticalPattern.Points.Add(verticalpoint);
+                    }
                 }
             }
             
@@ -300,6 +316,7 @@ namespace DGPattern
             PolarChart.Series.Clear();
             PolarChart.Series.Add(pattern);
             PolarChart.Series.Add(zoomandenhance);
+            PolarChart.Series.Add(verticalPattern);
             PolarChart.ChartAreas[0].AxisY.Maximum = maxy;
         }
         private void CalculatePattern()
@@ -336,6 +353,26 @@ namespace DGPattern
             txtSpacing.Text = "0";
             txtOrientation.Text = "0";
             txtHeight.Text = "90";
+        }
+
+        private void txtAzimuth_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Double scrollValue = double.Parse(txtAzimuth.Text) * 10;
+                AzimuthScrollBar.Value = (int)scrollValue;
+                viewAzimuth = double.Parse(txtAzimuth.Text);
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void AzimuthScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            txtAzimuth.Text = ((double)(AzimuthScrollBar.Value) / 10).ToString();
+            CalculatePattern();
         }
     }
 }

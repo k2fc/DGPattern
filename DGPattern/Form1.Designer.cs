@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.PolarChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.RatioScrollBar = new System.Windows.Forms.HScrollBar();
             this.PhaseScrollBar = new System.Windows.Forms.HScrollBar();
@@ -57,6 +57,10 @@
             this.txtTheta = new System.Windows.Forms.TextBox();
             this.btnHighPrecison = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
+            this.txtAzimuth = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.AzimuthScrollBar = new System.Windows.Forms.HScrollBar();
             ((System.ComponentModel.ISupportInitialize)(this.PolarChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTowers)).BeginInit();
             this.SuspendLayout();
@@ -64,30 +68,30 @@
             // PolarChart
             // 
             this.PolarChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.Name = "ChartArea1";
-            this.PolarChart.ChartAreas.Add(chartArea1);
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.PolarChart.Legends.Add(legend1);
+            chartArea4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            chartArea4.Name = "ChartArea1";
+            this.PolarChart.ChartAreas.Add(chartArea4);
+            legend4.Enabled = false;
+            legend4.Name = "Legend1";
+            this.PolarChart.Legends.Add(legend4);
             this.PolarChart.Location = new System.Drawing.Point(12, 12);
             this.PolarChart.Name = "PolarChart";
             this.PolarChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Polar;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.XValueMember = "0,1,2,3";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            series1.YValueMembers = "1,1,.5,1";
-            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            this.PolarChart.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Polar;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            series4.XValueMember = "0,1,2,3";
+            series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series4.YValueMembers = "1,1,.5,1";
+            series4.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            this.PolarChart.Series.Add(series4);
             this.PolarChart.Size = new System.Drawing.Size(729, 747);
             this.PolarChart.SuppressExceptions = true;
             this.PolarChart.TabIndex = 0;
             this.PolarChart.Text = "chart1";
-            title1.Name = "Title1";
-            this.PolarChart.Titles.Add(title1);
+            title4.Name = "Title1";
+            this.PolarChart.Titles.Add(title4);
             this.PolarChart.Click += new System.EventHandler(this.chart1_Click);
             // 
             // RatioScrollBar
@@ -131,7 +135,7 @@
             // ThetaScrollBar
             // 
             this.ThetaScrollBar.LargeChange = 1;
-            this.ThetaScrollBar.Location = new System.Drawing.Point(758, 322);
+            this.ThetaScrollBar.Location = new System.Drawing.Point(747, 600);
             this.ThetaScrollBar.Maximum = 900;
             this.ThetaScrollBar.Name = "ThetaScrollBar";
             this.ThetaScrollBar.Size = new System.Drawing.Size(17, 80);
@@ -288,6 +292,11 @@
             // txtTowers
             // 
             this.txtTowers.Location = new System.Drawing.Point(846, 10);
+            this.txtTowers.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.txtTowers.Name = "txtTowers";
             this.txtTowers.Size = new System.Drawing.Size(65, 20);
             this.txtTowers.TabIndex = 23;
@@ -300,7 +309,7 @@
             // 
             // txtTheta
             // 
-            this.txtTheta.Location = new System.Drawing.Point(747, 405);
+            this.txtTheta.Location = new System.Drawing.Point(747, 683);
             this.txtTheta.Name = "txtTheta";
             this.txtTheta.Size = new System.Drawing.Size(40, 20);
             this.txtTheta.TabIndex = 24;
@@ -328,11 +337,53 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // txtAzimuth
+            // 
+            this.txtAzimuth.Location = new System.Drawing.Point(747, 709);
+            this.txtAzimuth.Name = "txtAzimuth";
+            this.txtAzimuth.Size = new System.Drawing.Size(40, 20);
+            this.txtAzimuth.TabIndex = 27;
+            this.txtAzimuth.Text = "0";
+            this.txtAzimuth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtAzimuth.TextChanged += new System.EventHandler(this.txtAzimuth_TextChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(793, 686);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(51, 13);
+            this.label8.TabIndex = 28;
+            this.label8.Text = "Elevation";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(794, 712);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(44, 13);
+            this.label9.TabIndex = 29;
+            this.label9.Text = "Azimuth";
+            // 
+            // AzimuthScrollBar
+            // 
+            this.AzimuthScrollBar.Location = new System.Drawing.Point(747, 735);
+            this.AzimuthScrollBar.Maximum = 1800;
+            this.AzimuthScrollBar.Minimum = -1800;
+            this.AzimuthScrollBar.Name = "AzimuthScrollBar";
+            this.AzimuthScrollBar.Size = new System.Drawing.Size(227, 20);
+            this.AzimuthScrollBar.TabIndex = 30;
+            this.AzimuthScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.AzimuthScrollBar_Scroll);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 764);
+            this.Controls.Add(this.AzimuthScrollBar);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txtAzimuth);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnHighPrecison);
             this.Controls.Add(this.txtTheta);
@@ -394,6 +445,10 @@
         private System.Windows.Forms.TextBox txtTheta;
         private System.Windows.Forms.Button btnHighPrecison;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.TextBox txtAzimuth;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.HScrollBar AzimuthScrollBar;
     }
 }
 
