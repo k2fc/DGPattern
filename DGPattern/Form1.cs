@@ -309,13 +309,13 @@ namespace DGPattern
                     DataPoint zoompoint = new DataPoint(azimuth, directionalmagnitude[i] * 10);
                     zoomandenhance.Points.Add(zoompoint);
                     System.Diagnostics.Debug.WriteLine(directionalmagnitude[i].ToString());
-                    if (azimuth <= 90) 
+                    if (azimuth <= 90 && chkElevation.Checked) 
                     {
                         double elevation = 90 - azimuth;
                         DataPoint verticalpoint = new DataPoint(azimuth, DirectionalResult(viewAzimuth, elevation));
                         verticalPattern.Points.Add(verticalpoint);
                     }
-                    else if (azimuth >= 270)
+                    else if (azimuth >= 270 && chkElevation.Checked)
                     {
                         double elevation = azimuth - 270;
                         DataPoint verticalpoint = new DataPoint(azimuth, DirectionalResult(viewAzimuth + 180, elevation));
@@ -374,6 +374,7 @@ namespace DGPattern
                 Double scrollValue = double.Parse(txtAzimuth.Text) * 10;
                 AzimuthScrollBar.Value = (int)scrollValue;
                 viewAzimuth = double.Parse(txtAzimuth.Text);
+                CalculatePattern();
             }
             catch
             {
@@ -384,6 +385,13 @@ namespace DGPattern
         private void AzimuthScrollBar_Scroll(object sender, ScrollEventArgs e)
         {
             txtAzimuth.Text = ((double)(AzimuthScrollBar.Value) / 10).ToString();
+            CalculatePattern();
+        }
+
+        private void chkElevation_CheckedChanged(object sender, EventArgs e)
+        {
+            AzimuthScrollBar.Enabled = chkElevation.Checked;
+            txtAzimuth.Enabled = chkElevation.Checked;
             CalculatePattern();
         }
     }

@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.PolarChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.RatioScrollBar = new System.Windows.Forms.HScrollBar();
             this.PhaseScrollBar = new System.Windows.Forms.HScrollBar();
@@ -61,6 +61,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.AzimuthScrollBar = new System.Windows.Forms.HScrollBar();
+            this.chkElevation = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.PolarChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTowers)).BeginInit();
             this.SuspendLayout();
@@ -68,30 +69,30 @@
             // PolarChart
             // 
             this.PolarChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea4.Name = "ChartArea1";
-            this.PolarChart.ChartAreas.Add(chartArea4);
-            legend4.Enabled = false;
-            legend4.Name = "Legend1";
-            this.PolarChart.Legends.Add(legend4);
+            chartArea2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            chartArea2.Name = "ChartArea1";
+            this.PolarChart.ChartAreas.Add(chartArea2);
+            legend2.Enabled = false;
+            legend2.Name = "Legend1";
+            this.PolarChart.Legends.Add(legend2);
             this.PolarChart.Location = new System.Drawing.Point(12, 12);
             this.PolarChart.Name = "PolarChart";
             this.PolarChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Polar;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            series4.XValueMember = "0,1,2,3";
-            series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            series4.YValueMembers = "1,1,.5,1";
-            series4.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            this.PolarChart.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Polar;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            series2.XValueMember = "0,1,2,3";
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series2.YValueMembers = "1,1,.5,1";
+            series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            this.PolarChart.Series.Add(series2);
             this.PolarChart.Size = new System.Drawing.Size(729, 747);
             this.PolarChart.SuppressExceptions = true;
             this.PolarChart.TabIndex = 0;
             this.PolarChart.Text = "chart1";
-            title4.Name = "Title1";
-            this.PolarChart.Titles.Add(title4);
+            title2.Name = "Title1";
+            this.PolarChart.Titles.Add(title2);
             this.PolarChart.Click += new System.EventHandler(this.chart1_Click);
             // 
             // RatioScrollBar
@@ -375,11 +376,23 @@
             this.AzimuthScrollBar.TabIndex = 30;
             this.AzimuthScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.AzimuthScrollBar_Scroll);
             // 
+            // chkElevation
+            // 
+            this.chkElevation.AutoSize = true;
+            this.chkElevation.Location = new System.Drawing.Point(853, 711);
+            this.chkElevation.Name = "chkElevation";
+            this.chkElevation.Size = new System.Drawing.Size(121, 17);
+            this.chkElevation.TabIndex = 31;
+            this.chkElevation.Text = "Show Elevation Plot";
+            this.chkElevation.UseVisualStyleBackColor = true;
+            this.chkElevation.CheckedChanged += new System.EventHandler(this.chkElevation_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 764);
+            this.Controls.Add(this.chkElevation);
             this.Controls.Add(this.AzimuthScrollBar);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -449,6 +462,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.HScrollBar AzimuthScrollBar;
+        private System.Windows.Forms.CheckBox chkElevation;
     }
 }
 
