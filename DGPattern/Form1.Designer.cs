@@ -1,4 +1,18 @@
-﻿namespace DGPattern
+﻿//    DG Pattern. A tool to visualize AM Directional Arrays
+//    Copyright(C)2017 Dennis Graiani <dennis.graiani@gmail.com>
+
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, version 3.
+
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+//    GNU General Public License for more details.
+
+//    You should have received a copy of the GNU General Public License
+//    along with this program.If not, see<http://www.gnu.org/licenses/>.
+namespace DGPattern
 {
     partial class Form1
     {
@@ -59,7 +73,7 @@
             this.btnReset = new System.Windows.Forms.Button();
             this.txtAzimuth = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblAzimuth = new System.Windows.Forms.Label();
             this.AzimuthScrollBar = new System.Windows.Forms.HScrollBar();
             this.chkElevation = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.PolarChart)).BeginInit();
@@ -340,6 +354,7 @@
             // 
             // txtAzimuth
             // 
+            this.txtAzimuth.Enabled = false;
             this.txtAzimuth.Location = new System.Drawing.Point(747, 709);
             this.txtAzimuth.Name = "txtAzimuth";
             this.txtAzimuth.Size = new System.Drawing.Size(40, 20);
@@ -357,17 +372,19 @@
             this.label8.TabIndex = 28;
             this.label8.Text = "Elevation";
             // 
-            // label9
+            // lblAzimuth
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(794, 712);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(44, 13);
-            this.label9.TabIndex = 29;
-            this.label9.Text = "Azimuth";
+            this.lblAzimuth.AutoSize = true;
+            this.lblAzimuth.Enabled = false;
+            this.lblAzimuth.Location = new System.Drawing.Point(794, 712);
+            this.lblAzimuth.Name = "lblAzimuth";
+            this.lblAzimuth.Size = new System.Drawing.Size(44, 13);
+            this.lblAzimuth.TabIndex = 29;
+            this.lblAzimuth.Text = "Azimuth";
             // 
             // AzimuthScrollBar
             // 
+            this.AzimuthScrollBar.Enabled = false;
             this.AzimuthScrollBar.Location = new System.Drawing.Point(747, 735);
             this.AzimuthScrollBar.Maximum = 1800;
             this.AzimuthScrollBar.Minimum = -1800;
@@ -394,7 +411,7 @@
             this.ClientSize = new System.Drawing.Size(1203, 764);
             this.Controls.Add(this.chkElevation);
             this.Controls.Add(this.AzimuthScrollBar);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lblAzimuth);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtAzimuth);
             this.Controls.Add(this.btnReset);
@@ -460,7 +477,7 @@
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.TextBox txtAzimuth;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblAzimuth;
         private System.Windows.Forms.HScrollBar AzimuthScrollBar;
         private System.Windows.Forms.CheckBox chkElevation;
     }

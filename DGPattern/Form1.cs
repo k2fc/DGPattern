@@ -1,4 +1,19 @@
-﻿using System;
+﻿//    DG Pattern. A tool to visualize AM Directional Arrays
+//    Copyright(C)2017 Dennis Graiani <dennis.graiani@gmail.com>
+
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, version 3.
+
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+//    GNU General Public License for more details.
+
+//    You should have received a copy of the GNU General Public License
+//    along with this program.If not, see<http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,7 +42,7 @@ namespace DGPattern
         double viewAzimuth;
         int numTowers;
         int tower;
-        double[] directionalmagnitude;
+        //double[] directionalmagnitude;
         
 
 
@@ -48,7 +63,7 @@ namespace DGPattern
             tower = 1;
             ratio[1] = 1;
             heightA[1] = 90;
-            directionalmagnitude = new double[3600];
+            //directionalmagnitude = new double[3600];
             CalculatePattern();
         }
 
@@ -268,28 +283,29 @@ namespace DGPattern
                 for (int i = 0; i < 3600; i++)
                 {
                     double azimuth = ((double)i)/10;
-                    directionalmagnitude[i] = DirectionalResult(azimuth, viewElevation);
-                    if (directionalmagnitude[i] > maxy)
+                    double directionalmagnitude = 0;
+                    directionalmagnitude = DirectionalResult(azimuth, viewElevation);
+                    if (directionalmagnitude > maxy)
                     {
-                        maxy = directionalmagnitude[i];
+                        maxy = directionalmagnitude;
                     }
-                    DataPoint point = new DataPoint(azimuth, directionalmagnitude[i]);
+                    DataPoint point = new DataPoint(azimuth, directionalmagnitude);
                     pattern.Points.Add(point);
-                    DataPoint zoompoint = new DataPoint(azimuth, directionalmagnitude[i] * 10);
+                    DataPoint zoompoint = new DataPoint(azimuth, directionalmagnitude * 10);
                     zoomandenhance.Points.Add(zoompoint);
-                    if (azimuth <= 90)
+                    if (azimuth <= 90 && chkElevation.Checked)
                     {
                         double elevation = 90 - azimuth;
                         DataPoint verticalpoint = new DataPoint(azimuth, DirectionalResult(viewAzimuth, elevation));
                         verticalPattern.Points.Add(verticalpoint);
                     }
-                    else if (azimuth >= 270)
+                    else if (azimuth >= 270 && chkElevation.Checked)
                     {
                         double elevation = azimuth - 270;
                         DataPoint verticalpoint = new DataPoint(azimuth, DirectionalResult(viewAzimuth + 180, elevation));
                         verticalPattern.Points.Add(verticalpoint);
                     }
-                    System.Diagnostics.Debug.WriteLine(directionalmagnitude[i].ToString());
+                    System.Diagnostics.Debug.WriteLine(directionalmagnitude.ToString());
 
                 }
             }
@@ -298,17 +314,18 @@ namespace DGPattern
                 for (int i = 0; i < 360; i++)
                 {
                     double azimuth = i;
-                    directionalmagnitude[i] = DirectionalResult(azimuth, viewElevation);
-                    if (directionalmagnitude[i] > maxy)
+                    double directionalmagnitude = 0;
+                    directionalmagnitude = DirectionalResult(azimuth, viewElevation);
+                    if (directionalmagnitude > maxy)
                     {
-                        maxy = directionalmagnitude[i];
+                        maxy = directionalmagnitude;
                         //txtAzimuth.Text = azimuth.ToString();
                     }
-                    DataPoint point = new DataPoint(azimuth, directionalmagnitude[i]);
+                    DataPoint point = new DataPoint(azimuth, directionalmagnitude);
                     pattern.Points.Add(point);
-                    DataPoint zoompoint = new DataPoint(azimuth, directionalmagnitude[i] * 10);
+                    DataPoint zoompoint = new DataPoint(azimuth, directionalmagnitude * 10);
                     zoomandenhance.Points.Add(zoompoint);
-                    System.Diagnostics.Debug.WriteLine(directionalmagnitude[i].ToString());
+                    System.Diagnostics.Debug.WriteLine(directionalmagnitude.ToString());
                     if (azimuth <= 90 && chkElevation.Checked) 
                     {
                         double elevation = 90 - azimuth;
@@ -392,6 +409,7 @@ namespace DGPattern
         {
             AzimuthScrollBar.Enabled = chkElevation.Checked;
             txtAzimuth.Enabled = chkElevation.Checked;
+            lblAzimuth.Enabled = chkElevation.Checked;
             CalculatePattern();
         }
     }
