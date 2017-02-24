@@ -280,15 +280,36 @@ namespace DGPattern
             
             if (highPrecision)
             {
+                double previousMagnitude = DirectionalResult(359.9, viewElevation);
+                bool increasing = (DirectionalResult(0, viewElevation) > previousMagnitude);
+                lstLobes.Items.Clear();
+                lstNulls.Items.Clear();
                 for (int i = 0; i < 3600; i++)
                 {
                     double azimuth = ((double)i)/10;
-                    double directionalmagnitude = 0;
-                    directionalmagnitude = DirectionalResult(azimuth, viewElevation);
+                    double directionalmagnitude = DirectionalResult(azimuth, viewElevation);
                     if (directionalmagnitude > maxy)
                     {
                         maxy = directionalmagnitude;
                     }
+
+                    if (directionalmagnitude > previousMagnitude)
+                    {
+                        if (!increasing)
+                        {
+                            lstNulls.Items.Add((azimuth -.1) .ToString());
+                        }
+                        increasing = true;
+                    }
+                    else
+                    {
+                        if (increasing)
+                        {
+                            lstLobes.Items.Add((azimuth -.1).ToString());
+                        }
+                        increasing = false;
+                    }
+                    previousMagnitude = directionalmagnitude;
                     DataPoint point = new DataPoint(azimuth, directionalmagnitude);
                     pattern.Points.Add(point);
                     DataPoint zoompoint = new DataPoint(azimuth, directionalmagnitude * 10);
@@ -311,16 +332,38 @@ namespace DGPattern
             }
             else
             {
+                double previousMagnitude = DirectionalResult(359, viewElevation);
+                bool increasing = (DirectionalResult(0, viewElevation) > previousMagnitude);
+                lstLobes.Items.Clear();
+                lstNulls.Items.Clear();
                 for (int i = 0; i < 360; i++)
                 {
+
                     double azimuth = i;
-                    double directionalmagnitude = 0;
-                    directionalmagnitude = DirectionalResult(azimuth, viewElevation);
+                    double directionalmagnitude = DirectionalResult(azimuth, viewElevation);
                     if (directionalmagnitude > maxy)
                     {
                         maxy = directionalmagnitude;
                         //txtAzimuth.Text = azimuth.ToString();
                     }
+
+                    if (directionalmagnitude > previousMagnitude)
+                    {
+                        if (!increasing)
+                        {
+                            lstNulls.Items.Add((azimuth - 1).ToString());
+                        }
+                        increasing = true;
+                    }
+                    else
+                    {
+                        if (increasing)
+                        {
+                            lstLobes.Items.Add((azimuth - 1).ToString());
+                        }
+                        increasing = false;
+                    }
+                    previousMagnitude = directionalmagnitude;
                     DataPoint point = new DataPoint(azimuth, directionalmagnitude);
                     pattern.Points.Add(point);
                     DataPoint zoompoint = new DataPoint(azimuth, directionalmagnitude * 10);

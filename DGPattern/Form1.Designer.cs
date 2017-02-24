@@ -76,6 +76,10 @@ namespace DGPattern
             this.lblAzimuth = new System.Windows.Forms.Label();
             this.AzimuthScrollBar = new System.Windows.Forms.HScrollBar();
             this.chkElevation = new System.Windows.Forms.CheckBox();
+            this.lstLobes = new System.Windows.Forms.ListBox();
+            this.lstNulls = new System.Windows.Forms.ListBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PolarChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTowers)).BeginInit();
             this.SuspendLayout();
@@ -404,11 +408,49 @@ namespace DGPattern
             this.chkElevation.UseVisualStyleBackColor = true;
             this.chkElevation.CheckedChanged += new System.EventHandler(this.chkElevation_CheckedChanged);
             // 
+            // lstLobes
+            // 
+            this.lstLobes.FormattingEnabled = true;
+            this.lstLobes.Location = new System.Drawing.Point(846, 465);
+            this.lstLobes.Name = "lstLobes";
+            this.lstLobes.Size = new System.Drawing.Size(65, 95);
+            this.lstLobes.TabIndex = 32;
+            // 
+            // lstNulls
+            // 
+            this.lstNulls.FormattingEnabled = true;
+            this.lstNulls.Location = new System.Drawing.Point(917, 465);
+            this.lstNulls.Name = "lstNulls";
+            this.lstNulls.Size = new System.Drawing.Size(65, 95);
+            this.lstNulls.TabIndex = 33;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(846, 446);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(36, 13);
+            this.label9.TabIndex = 34;
+            this.label9.Text = "Lobes";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(917, 446);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(30, 13);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "Nulls";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 764);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lstNulls);
+            this.Controls.Add(this.lstLobes);
             this.Controls.Add(this.chkElevation);
             this.Controls.Add(this.AzimuthScrollBar);
             this.Controls.Add(this.lblAzimuth);
@@ -480,6 +522,10 @@ namespace DGPattern
         private System.Windows.Forms.Label lblAzimuth;
         private System.Windows.Forms.HScrollBar AzimuthScrollBar;
         private System.Windows.Forms.CheckBox chkElevation;
+        private System.Windows.Forms.ListBox lstLobes;
+        private System.Windows.Forms.ListBox lstNulls;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }
 
