@@ -635,6 +635,7 @@ namespace DGPattern
             this.Controls.Add(this.PolarChart);
             this.Name = "Form1";
             this.Text = "DGPattern";
+            this.Icon = DGPattern.Properties.Resources.DGPattern;
             ((System.ComponentModel.ISupportInitialize)(this.PolarChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTowers)).EndInit();
             this.ResumeLayout(false);
