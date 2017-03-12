@@ -31,6 +31,7 @@ namespace DGPattern
         double[] heightB;
         double[] heightC;
         double[] heightD;
+        int[] toploadSw;
         double viewElevation;
         double viewAzimuth;
         int numTowers;
@@ -50,12 +51,14 @@ namespace DGPattern
             heightB = new double[100];
             heightC = new double[100];
             heightD = new double[100];
+            toploadSw = new int[100];
             viewElevation = 0;
             viewAzimuth = 0;
             numTowers = 1;
             tower = 1;
             ratio[1] = 1;
             heightA[1] = 90;
+            toploadSw[1] = 0;
             //directionalmagnitude = new double[3600];
             CalculatePattern();
         }
@@ -87,6 +90,19 @@ namespace DGPattern
         private void HeightScrollBar_Scroll(object sender, ScrollEventArgs e)
         {
             txtHeight.Text = ((double)(HeightScrollBar.Value) / 10).ToString();
+        }
+
+        private void HeightBScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            txtHeightB.Text = ((double)(HeightBScrollBar.Value) / 10).ToString();
+        }
+        private void HeightCScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            txtHeightC.Text = ((double)(HeightCScrollBar.Value) / 10).ToString();
+        }
+        private void HeightDScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            txtHeightD.Text = ((double)(HeightDScrollBar.Value) / 10).ToString();
         }
 
         private void txtRatio_TextChanged(object sender, EventArgs e)
@@ -165,6 +181,51 @@ namespace DGPattern
             }
         }
 
+        private void txtHeightB_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Double scrollValue = double.Parse(txtHeightB.Text) * 10;
+                HeightBScrollBar.Value = (int)scrollValue;
+                heightB[tower] = double.Parse(txtHeightB.Text);
+                CalculatePattern();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void txtHeightC_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Double scrollValue = double.Parse(txtHeightC.Text) * 10;
+                HeightCScrollBar.Value = (int)scrollValue;
+                heightC[tower] = double.Parse(txtHeightC.Text);
+                CalculatePattern();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void txtHeightD_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Double scrollValue = double.Parse(txtHeightD.Text) * 10;
+                HeightDScrollBar.Value = (int)scrollValue;
+                heightD[tower] = double.Parse(txtHeightD.Text);
+                CalculatePattern();
+            }
+            catch
+            {
+
+            }
+        }
+
         private void txtTowers_ValueChanged(object sender, EventArgs e)
         {
             numTowers = (int)txtTowers.Value;
@@ -205,6 +266,12 @@ namespace DGPattern
                 txtSpacing.Text = spacing[tower].ToString();
                 txtOrientation.Text = orientation[tower].ToString();
                 txtHeight.Text = heightA[tower].ToString();
+                txtHeightB.Text = heightB[tower].ToString();
+                txtHeightC.Text = heightC[tower].ToString();
+                txtHeightD.Text = heightD[tower].ToString();
+                radioButton0.Checked = (toploadSw[tower] == 0);
+                radioButton1.Checked = (toploadSw[tower] == 1);
+                radioButton2.Checked = (toploadSw[tower] == 2);
 
             }
             catch
@@ -239,6 +306,59 @@ namespace DGPattern
             double theta = DegreeToRadian(angle);
             return (Math.Cos(G * Math.Sin(theta)) - Math.Cos(G)) / ((1 - Math.Cos(G)) * Math.Cos(theta));
         }
+
+        private double FunctionOfTheta(double angle, double heightA, double heightB)
+        {
+            double A = DegreeToRadian(heightA);
+            double B = DegreeToRadian(heightB);
+            double theta = DegreeToRadian(angle);
+            return (
+                (
+                    (Math.Cos(B) * Math.Cos(A * Math.Sin(theta))) - (Math.Sin(theta) * Math.Sin(B) * Math.Sin(A * Math.Sin(theta))) - (Math.Cos(A + B))
+                ) / (
+                    Math.Cos(theta) * (Math.Cos(B) - Math.Cos(A + B))
+                ));
+        }
+
+        private double FunctionOfTheta(double angle, double heightA, double heightB, double heightC, double heightD)
+        {
+            double A = DegreeToRadian(heightA);
+            double B = DegreeToRadian(heightB);
+            double C = DegreeToRadian(heightC);
+            double D = DegreeToRadian(heightD);
+            double G = A + B;
+            double H = C + D;
+            double delta = H - A;
+            double theta = DegreeToRadian(angle);
+            
+
+            return ((
+                    (Math.Sin(delta)*((Math.Cos(B) * Math.Cos(A * Math.Sin(theta))) - Math.Cos(G)) + (Math.Sin(B) * ((Math.Cos(D) * Math.Cos (C * Math.Sin(theta))) - (Math.Sin(theta) * Math.Sin(D) * Math.Sin(C * Math.Sin(theta))) - (Math.Cos(delta)* Math.Cos(A * Math.Sin(theta))))))
+                )/(
+                    Math.Cos(theta) * ((Math.Sin(delta) * (Math.Cos(B) - Math.Cos(G)))+(Math.Sin(B) * (Math.Cos(D) - Math.Cos(delta))))
+                ));
+
+        }
+
+        private double FunctionOfTheta (int toploadsw, double angle, double heightA, double heightB, double heightC, double heightD)
+        {
+            if (toploadsw == 0)
+            {
+                return FunctionOfTheta(angle, heightA);
+            }
+            else if (toploadsw == 1)
+            {
+                return FunctionOfTheta(angle, heightA, heightB);
+            }
+            else if (toploadsw == 2)
+            {
+                return FunctionOfTheta(angle, heightA, heightB, heightC, heightD);
+            }
+            else
+            {
+                return 0;
+            }
+        }
         private double DegreeToRadian(double angle)
         {
             return Math.PI * angle / 180.0;
@@ -253,7 +373,7 @@ namespace DGPattern
             
             for (int i = 1; i <= numTowers; i++)
             {
-                double magnitude = ratio[i] * FunctionOfTheta(elevation, heightA[i]);
+                double magnitude = ratio[i] * FunctionOfTheta(toploadSw[i], elevation, heightA[i], heightB[i], heightC[i], heightD[i]);
                 double towerPhaseShift = DegreeToRadian(phase[i]);
                 double totalphase = (DegreeToRadian(spacing[i]) * Math.Cos(DegreeToRadian(orientation[i]) - phi))+towerPhaseShift;
                 Complex contribution = Complex.FromPolarCoordinates(magnitude, totalphase);
@@ -407,6 +527,7 @@ namespace DGPattern
                 heightB[i] = 0;
                 heightC[i] = 0;
                 heightD[i] = 0;
+                toploadSw[i] = 0;
             }
             ratio[1] = 1;
             heightA[1] = 90;
@@ -416,6 +537,10 @@ namespace DGPattern
             txtSpacing.Text = "0";
             txtOrientation.Text = "0";
             txtHeight.Text = "90";
+            txtHeightB.Text = "0";
+            txtHeightC.Text = "0";
+            txtHeightD.Text = "0";
+            radioButton0.Checked = true;
         }
 
         private void txtAzimuth_TextChanged(object sender, EventArgs e)
@@ -446,5 +571,83 @@ namespace DGPattern
             lblAzimuth.Enabled = chkElevation.Checked;
             CalculatePattern();
         }
+
+        private void radioButton0_CheckedChanged(object sender, EventArgs e)
+        {
+            toploadSwChange();
+        }
+
+        
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            toploadSwChange();
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            toploadSwChange();
+        }
+
+        private void toploadSwChange()
+        {
+            if (radioButton2.Checked)
+            {
+                toploadSw[tower] = 2;
+
+                lblHeightA.Text = "A";
+                
+                lblHeightB.Visible = true;
+                HeightBScrollBar.Visible = true;
+                txtHeightB.Visible = true;
+
+                lblHeightC.Visible = true;
+                HeightCScrollBar.Visible = true;
+                txtHeightC.Visible = true;
+
+                lblHeightD.Visible = true;
+                HeightDScrollBar.Visible = true;
+                txtHeightD.Visible = true;
+            }
+            else if (radioButton1.Checked)
+            {
+                toploadSw[tower] = 1;
+
+                lblHeightA.Text = "A";
+
+                lblHeightB.Visible = true;
+                HeightBScrollBar.Visible = true;
+                txtHeightB.Visible = true;
+
+                lblHeightC.Visible = false;
+                HeightCScrollBar.Visible = false;
+                txtHeightC.Visible = false;
+
+                lblHeightD.Visible = false;
+                HeightDScrollBar.Visible = false;
+                txtHeightD.Visible = false;
+            }
+            else if (radioButton0.Checked)
+            {
+                toploadSw[tower] = 0;
+
+                lblHeightA.Text = "Height";
+
+                lblHeightB.Visible = false;
+                HeightBScrollBar.Visible = false;
+                txtHeightB.Visible = false;
+
+                lblHeightC.Visible = false;
+                HeightCScrollBar.Visible = false;
+                txtHeightC.Visible = false;
+
+                lblHeightD.Visible = false;
+                HeightDScrollBar.Visible = false;
+                txtHeightD.Visible = false;
+            }
+            CalculatePattern();
+        }
+
+        
     }
 }
