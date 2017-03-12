@@ -42,10 +42,10 @@ namespace DGPattern
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.PolarChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.RatioScrollBar = new System.Windows.Forms.HScrollBar();
             this.PhaseScrollBar = new System.Windows.Forms.HScrollBar();
@@ -62,7 +62,7 @@ namespace DGPattern
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblHeightA = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.TowerScrollBar = new System.Windows.Forms.HScrollBar();
             this.label7 = new System.Windows.Forms.Label();
@@ -80,6 +80,18 @@ namespace DGPattern
             this.lstNulls = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.lblHeightB = new System.Windows.Forms.Label();
+            this.txtHeightB = new System.Windows.Forms.TextBox();
+            this.HeightBScrollBar = new System.Windows.Forms.HScrollBar();
+            this.lblHeightC = new System.Windows.Forms.Label();
+            this.txtHeightC = new System.Windows.Forms.TextBox();
+            this.HeightCScrollBar = new System.Windows.Forms.HScrollBar();
+            this.lblHeightD = new System.Windows.Forms.Label();
+            this.txtHeightD = new System.Windows.Forms.TextBox();
+            this.HeightDScrollBar = new System.Windows.Forms.HScrollBar();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton0 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.PolarChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTowers)).BeginInit();
             this.SuspendLayout();
@@ -87,30 +99,30 @@ namespace DGPattern
             // PolarChart
             // 
             this.PolarChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea2.Name = "ChartArea1";
-            this.PolarChart.ChartAreas.Add(chartArea2);
-            legend2.Enabled = false;
-            legend2.Name = "Legend1";
-            this.PolarChart.Legends.Add(legend2);
+            chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            chartArea1.Name = "ChartArea1";
+            this.PolarChart.ChartAreas.Add(chartArea1);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.PolarChart.Legends.Add(legend1);
             this.PolarChart.Location = new System.Drawing.Point(12, 12);
             this.PolarChart.Name = "PolarChart";
             this.PolarChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Polar;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            series2.XValueMember = "0,1,2,3";
-            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            series2.YValueMembers = "1,1,.5,1";
-            series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            this.PolarChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Polar;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            series1.XValueMember = "0,1,2,3";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series1.YValueMembers = "1,1,.5,1";
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            this.PolarChart.Series.Add(series1);
             this.PolarChart.Size = new System.Drawing.Size(729, 747);
             this.PolarChart.SuppressExceptions = true;
             this.PolarChart.TabIndex = 0;
             this.PolarChart.Text = "chart1";
-            title2.Name = "Title1";
-            this.PolarChart.Titles.Add(title2);
+            title1.Name = "Title1";
+            this.PolarChart.Titles.Add(title1);
             this.PolarChart.Click += new System.EventHandler(this.chart1_Click);
             // 
             // RatioScrollBar
@@ -164,7 +176,7 @@ namespace DGPattern
             // 
             // HeightScrollBar
             // 
-            this.HeightScrollBar.Location = new System.Drawing.Point(842, 279);
+            this.HeightScrollBar.Location = new System.Drawing.Point(842, 301);
             this.HeightScrollBar.Maximum = 3600;
             this.HeightScrollBar.Name = "HeightScrollBar";
             this.HeightScrollBar.Size = new System.Drawing.Size(223, 17);
@@ -210,7 +222,7 @@ namespace DGPattern
             // 
             // txtHeight
             // 
-            this.txtHeight.Location = new System.Drawing.Point(1068, 276);
+            this.txtHeight.Location = new System.Drawing.Point(1068, 298);
             this.txtHeight.Name = "txtHeight";
             this.txtHeight.Size = new System.Drawing.Size(100, 20);
             this.txtHeight.TabIndex = 11;
@@ -257,15 +269,15 @@ namespace DGPattern
             this.label4.Text = "Orientation";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label5
+            // lblHeightA
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(802, 279);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 13);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Height";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblHeightA.AutoSize = true;
+            this.lblHeightA.Location = new System.Drawing.Point(800, 301);
+            this.lblHeightA.Name = "lblHeightA";
+            this.lblHeightA.Size = new System.Drawing.Size(38, 13);
+            this.lblHeightA.TabIndex = 16;
+            this.lblHeightA.Text = "Height";
+            this.lblHeightA.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label6
             // 
@@ -338,7 +350,7 @@ namespace DGPattern
             // 
             // btnHighPrecison
             // 
-            this.btnHighPrecison.Location = new System.Drawing.Point(1068, 302);
+            this.btnHighPrecison.Location = new System.Drawing.Point(1068, 446);
             this.btnHighPrecison.Name = "btnHighPrecison";
             this.btnHighPrecison.Size = new System.Drawing.Size(100, 23);
             this.btnHighPrecison.TabIndex = 25;
@@ -348,7 +360,7 @@ namespace DGPattern
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(1068, 332);
+            this.btnReset.Location = new System.Drawing.Point(1068, 476);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(100, 23);
             this.btnReset.TabIndex = 26;
@@ -442,11 +454,151 @@ namespace DGPattern
             this.label10.TabIndex = 35;
             this.label10.Text = "Nulls";
             // 
+            // lblHeightB
+            // 
+            this.lblHeightB.AutoSize = true;
+            this.lblHeightB.Location = new System.Drawing.Point(800, 327);
+            this.lblHeightB.Name = "lblHeightB";
+            this.lblHeightB.Size = new System.Drawing.Size(14, 13);
+            this.lblHeightB.TabIndex = 38;
+            this.lblHeightB.Text = "B";
+            this.lblHeightB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblHeightB.Visible = false;
+            // 
+            // txtHeightB
+            // 
+            this.txtHeightB.Location = new System.Drawing.Point(1068, 324);
+            this.txtHeightB.Name = "txtHeightB";
+            this.txtHeightB.Size = new System.Drawing.Size(100, 20);
+            this.txtHeightB.TabIndex = 12;
+            this.txtHeightB.Text = "0";
+            this.txtHeightB.Visible = false;
+            this.txtHeightB.TextChanged += new System.EventHandler(this.txtHeightB_TextChanged);
+            // 
+            // HeightBScrollBar
+            // 
+            this.HeightBScrollBar.Location = new System.Drawing.Point(842, 327);
+            this.HeightBScrollBar.Maximum = 3600;
+            this.HeightBScrollBar.Name = "HeightBScrollBar";
+            this.HeightBScrollBar.Size = new System.Drawing.Size(223, 17);
+            this.HeightBScrollBar.TabIndex = 36;
+            this.HeightBScrollBar.Visible = false;
+            this.HeightBScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.HeightBScrollBar_Scroll);
+            // 
+            // lblHeightC
+            // 
+            this.lblHeightC.AutoSize = true;
+            this.lblHeightC.Location = new System.Drawing.Point(800, 353);
+            this.lblHeightC.Name = "lblHeightC";
+            this.lblHeightC.Size = new System.Drawing.Size(14, 13);
+            this.lblHeightC.TabIndex = 41;
+            this.lblHeightC.Text = "C";
+            this.lblHeightC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblHeightC.Visible = false;
+            // 
+            // txtHeightC
+            // 
+            this.txtHeightC.Location = new System.Drawing.Point(1068, 350);
+            this.txtHeightC.Name = "txtHeightC";
+            this.txtHeightC.Size = new System.Drawing.Size(100, 20);
+            this.txtHeightC.TabIndex = 13;
+            this.txtHeightC.Text = "0";
+            this.txtHeightC.Visible = false;
+            this.txtHeightC.TextChanged += new System.EventHandler(this.txtHeightC_TextChanged);
+            // 
+            // HeightCScrollBar
+            // 
+            this.HeightCScrollBar.Location = new System.Drawing.Point(842, 353);
+            this.HeightCScrollBar.Maximum = 3600;
+            this.HeightCScrollBar.Name = "HeightCScrollBar";
+            this.HeightCScrollBar.Size = new System.Drawing.Size(223, 17);
+            this.HeightCScrollBar.TabIndex = 39;
+            this.HeightCScrollBar.Visible = false;
+            this.HeightCScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.HeightCScrollBar_Scroll);
+            // 
+            // lblHeightD
+            // 
+            this.lblHeightD.AutoSize = true;
+            this.lblHeightD.Location = new System.Drawing.Point(800, 379);
+            this.lblHeightD.Name = "lblHeightD";
+            this.lblHeightD.Size = new System.Drawing.Size(15, 13);
+            this.lblHeightD.TabIndex = 44;
+            this.lblHeightD.Text = "D";
+            this.lblHeightD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblHeightD.Visible = false;
+            // 
+            // txtHeightD
+            // 
+            this.txtHeightD.Location = new System.Drawing.Point(1068, 376);
+            this.txtHeightD.Name = "txtHeightD";
+            this.txtHeightD.Size = new System.Drawing.Size(100, 20);
+            this.txtHeightD.TabIndex = 14;
+            this.txtHeightD.Text = "0";
+            this.txtHeightD.Visible = false;
+            this.txtHeightD.TextChanged += new System.EventHandler(this.txtHeightD_TextChanged);
+            // 
+            // HeightDScrollBar
+            // 
+            this.HeightDScrollBar.Location = new System.Drawing.Point(842, 379);
+            this.HeightDScrollBar.Maximum = 3600;
+            this.HeightDScrollBar.Name = "HeightDScrollBar";
+            this.HeightDScrollBar.Size = new System.Drawing.Size(223, 17);
+            this.HeightDScrollBar.TabIndex = 42;
+            this.HeightDScrollBar.Visible = false;
+            this.HeightDScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.HeightDScrollBar_Scroll);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(1082, 276);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(88, 17);
+            this.radioButton2.TabIndex = 45;
+            this.radioButton2.Text = "Sectionalized";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(993, 276);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(83, 17);
+            this.radioButton1.TabIndex = 46;
+            this.radioButton1.Text = "Top Loaded";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton0
+            // 
+            this.radioButton0.AutoSize = true;
+            this.radioButton0.Checked = true;
+            this.radioButton0.Location = new System.Drawing.Point(936, 276);
+            this.radioButton0.Name = "radioButton0";
+            this.radioButton0.Size = new System.Drawing.Size(51, 17);
+            this.radioButton0.TabIndex = 47;
+            this.radioButton0.TabStop = true;
+            this.radioButton0.Text = "None";
+            this.radioButton0.UseVisualStyleBackColor = true;
+            this.radioButton0.CheckedChanged += new System.EventHandler(this.radioButton0_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 764);
+            this.Controls.Add(this.radioButton0);
+            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.lblHeightD);
+            this.Controls.Add(this.txtHeightD);
+            this.Controls.Add(this.HeightDScrollBar);
+            this.Controls.Add(this.lblHeightC);
+            this.Controls.Add(this.txtHeightC);
+            this.Controls.Add(this.HeightCScrollBar);
+            this.Controls.Add(this.lblHeightB);
+            this.Controls.Add(this.txtHeightB);
+            this.Controls.Add(this.HeightBScrollBar);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.lstNulls);
@@ -464,7 +616,7 @@ namespace DGPattern
             this.Controls.Add(this.label7);
             this.Controls.Add(this.TowerScrollBar);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblHeightA);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -508,7 +660,7 @@ namespace DGPattern
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblHeightA;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.HScrollBar TowerScrollBar;
         private System.Windows.Forms.Label label7;
@@ -526,6 +678,18 @@ namespace DGPattern
         private System.Windows.Forms.ListBox lstNulls;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblHeightB;
+        private System.Windows.Forms.TextBox txtHeightB;
+        private System.Windows.Forms.HScrollBar HeightBScrollBar;
+        private System.Windows.Forms.Label lblHeightC;
+        private System.Windows.Forms.TextBox txtHeightC;
+        private System.Windows.Forms.HScrollBar HeightCScrollBar;
+        private System.Windows.Forms.Label lblHeightD;
+        private System.Windows.Forms.TextBox txtHeightD;
+        private System.Windows.Forms.HScrollBar HeightDScrollBar;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton0;
     }
 }
 
