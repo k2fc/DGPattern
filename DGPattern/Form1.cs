@@ -319,7 +319,6 @@ namespace DGPattern
                         DataPoint verticalpoint = new DataPoint(azimuth, DirectionalResult(viewAzimuth + 180, elevation));
                         verticalPattern.Points.Add(verticalpoint);
                     }
-                    System.Diagnostics.Debug.WriteLine(directionalmagnitude.ToString());
 
                 }
             }
@@ -361,7 +360,6 @@ namespace DGPattern
                     pattern.Points.Add(point);
                     DataPoint zoompoint = new DataPoint(azimuth, directionalmagnitude * 10);
                     zoomandenhance.Points.Add(zoompoint);
-                    System.Diagnostics.Debug.WriteLine(directionalmagnitude.ToString());
                     if (azimuth <= 90 && chkElevation.Checked) 
                     {
                         double elevation = 90 - azimuth;
