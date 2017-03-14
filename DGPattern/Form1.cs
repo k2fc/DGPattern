@@ -32,6 +32,7 @@ namespace DGPattern
         double[] heightC;
         double[] heightD;
         int[] toploadSw;
+        bool[] towerRefSw;
         double viewElevation;
         double viewAzimuth;
         int numTowers;
@@ -52,6 +53,7 @@ namespace DGPattern
             heightC = new double[100];
             heightD = new double[100];
             toploadSw = new int[100];
+            towerRefSw = new bool[100];
             viewElevation = 0;
             viewAzimuth = 0;
             numTowers = 1;
@@ -59,6 +61,8 @@ namespace DGPattern
             ratio[1] = 1;
             heightA[1] = 90;
             toploadSw[1] = 0;
+            towerRefSw[1] = false;
+            chkRefSw.Enabled = false;
             //directionalmagnitude = new double[3600];
             CalculatePattern();
         }
@@ -158,6 +162,8 @@ namespace DGPattern
                 Double scrollValue = double.Parse(txtOrientation.Text) * 10;
                 OrientationScrollBar.Value = (int)scrollValue;
                 orientation[tower] = double.Parse(txtOrientation.Text);
+                
+                
                 CalculatePattern();
             }
             catch
@@ -272,7 +278,15 @@ namespace DGPattern
                 radioButton0.Checked = (toploadSw[tower] == 0);
                 radioButton1.Checked = (toploadSw[tower] == 1);
                 radioButton2.Checked = (toploadSw[tower] == 2);
-
+                chkRefSw.Checked = towerRefSw[tower];
+                if (tower == 1)
+                {
+                    chkRefSw.Enabled = false;
+                }
+                else
+                {
+                    chkRefSw.Enabled = true;
+                }
             }
             catch
             {
@@ -364,18 +378,40 @@ namespace DGPattern
             return Math.PI * angle / 180.0;
         }
 
+        private double RadianToDegree (double angle)
+        {
+            return angle * (180 / Math.PI);
+        }
+
         private double DirectionalResult (double azimuth, double elevation)
         {
             double phi = DegreeToRadian(azimuth);
             double theta = DegreeToRadian(elevation);
-            
+
+                       
             Complex resultant = new Complex(0,0);
             
             for (int i = 1; i <= numTowers; i++)
             {
+                double absolutespacing;
+                double absoluteorientation;
+
+                if (towerRefSw[i])
+                {
+                    Complex absolutelocation = Complex.Add(Complex.FromPolarCoordinates(spacing[i - 1], DegreeToRadian(orientation[i - 1])), 
+                        Complex.FromPolarCoordinates(spacing[i], DegreeToRadian(orientation[i])));
+                    absolutespacing = absolutelocation.Magnitude;
+                    absoluteorientation = absolutelocation.Phase;
+                }
+                else
+                {
+                    absolutespacing = spacing[i];
+                    absoluteorientation = DegreeToRadian(orientation[i]);
+                }
+
                 double magnitude = ratio[i] * FunctionOfTheta(toploadSw[i], elevation, heightA[i], heightB[i], heightC[i], heightD[i]);
                 double towerPhaseShift = DegreeToRadian(phase[i]);
-                double totalphase = (DegreeToRadian(spacing[i]) * Math.Cos(DegreeToRadian(orientation[i]) - phi))+towerPhaseShift;
+                double totalphase = (DegreeToRadian(absolutespacing) * Math.Cos(absoluteorientation - phi))+towerPhaseShift;
                 Complex contribution = Complex.FromPolarCoordinates(magnitude, totalphase);
                 resultant = Complex.Add(resultant, contribution);
             }
@@ -528,6 +564,7 @@ namespace DGPattern
                 heightC[i] = 0;
                 heightD[i] = 0;
                 toploadSw[i] = 0;
+                towerRefSw[i] = false;
             }
             ratio[1] = 1;
             heightA[1] = 90;
@@ -648,6 +685,10 @@ namespace DGPattern
             CalculatePattern();
         }
 
-        
+        private void chkRefSw_CheckedChanged(object sender, EventArgs e)
+        {
+            towerRefSw[tower] = chkRefSw.Checked;
+            CalculatePattern();
+        }
     }
 }
