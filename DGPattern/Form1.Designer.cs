@@ -42,10 +42,10 @@ namespace DGPattern
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.PolarChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.RatioScrollBar = new System.Windows.Forms.HScrollBar();
             this.PhaseScrollBar = new System.Windows.Forms.HScrollBar();
@@ -91,6 +91,7 @@ namespace DGPattern
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton0 = new System.Windows.Forms.RadioButton();
+            this.chkRefSw = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.PolarChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTowers)).BeginInit();
             this.SuspendLayout();
@@ -98,30 +99,30 @@ namespace DGPattern
             // PolarChart
             // 
             this.PolarChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.Name = "ChartArea1";
-            this.PolarChart.ChartAreas.Add(chartArea1);
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.PolarChart.Legends.Add(legend1);
+            chartArea2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            chartArea2.Name = "ChartArea1";
+            this.PolarChart.ChartAreas.Add(chartArea2);
+            legend2.Enabled = false;
+            legend2.Name = "Legend1";
+            this.PolarChart.Legends.Add(legend2);
             this.PolarChart.Location = new System.Drawing.Point(12, 12);
             this.PolarChart.Name = "PolarChart";
             this.PolarChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Polar;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.XValueMember = "0,1,2,3";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            series1.YValueMembers = "1,1,.5,1";
-            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            this.PolarChart.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Polar;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            series2.XValueMember = "0,1,2,3";
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series2.YValueMembers = "1,1,.5,1";
+            series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            this.PolarChart.Series.Add(series2);
             this.PolarChart.Size = new System.Drawing.Size(729, 747);
             this.PolarChart.SuppressExceptions = true;
             this.PolarChart.TabIndex = 0;
             this.PolarChart.Text = "chart1";
-            title1.Name = "Title1";
-            this.PolarChart.Titles.Add(title1);
+            title2.Name = "Title1";
+            this.PolarChart.Titles.Add(title2);
             this.PolarChart.Click += new System.EventHandler(this.chart1_Click);
             // 
             // RatioScrollBar
@@ -539,7 +540,7 @@ namespace DGPattern
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(1082, 276);
+            this.radioButton2.Location = new System.Drawing.Point(1082, 275);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(88, 17);
             this.radioButton2.TabIndex = 45;
@@ -571,11 +572,23 @@ namespace DGPattern
             this.radioButton0.UseVisualStyleBackColor = true;
             this.radioButton0.CheckedChanged += new System.EventHandler(this.radioButton0_CheckedChanged);
             // 
+            // chkRefSw
+            // 
+            this.chkRefSw.AutoSize = true;
+            this.chkRefSw.Location = new System.Drawing.Point(1050, 199);
+            this.chkRefSw.Name = "chkRefSw";
+            this.chkRefSw.Size = new System.Drawing.Size(120, 17);
+            this.chkRefSw.TabIndex = 15;
+            this.chkRefSw.Text = "Reference Previous";
+            this.chkRefSw.UseVisualStyleBackColor = true;
+            this.chkRefSw.CheckedChanged += new System.EventHandler(this.chkRefSw_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 764);
+            this.Controls.Add(this.chkRefSw);
             this.Controls.Add(this.radioButton0);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.radioButton2);
@@ -678,6 +691,7 @@ namespace DGPattern
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton0;
+        private System.Windows.Forms.CheckBox chkRefSw;
     }
 }
 
