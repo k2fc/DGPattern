@@ -69,7 +69,6 @@ namespace DGPattern
             this.txtTower = new System.Windows.Forms.TextBox();
             this.txtTowers = new System.Windows.Forms.NumericUpDown();
             this.txtTheta = new System.Windows.Forms.TextBox();
-            this.btnHighPrecison = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.txtAzimuth = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -348,16 +347,6 @@ namespace DGPattern
             this.txtTheta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtTheta.TextChanged += new System.EventHandler(this.txtTheta_TextChanged);
             // 
-            // btnHighPrecison
-            // 
-            this.btnHighPrecison.Location = new System.Drawing.Point(1068, 446);
-            this.btnHighPrecison.Name = "btnHighPrecison";
-            this.btnHighPrecison.Size = new System.Drawing.Size(100, 23);
-            this.btnHighPrecison.TabIndex = 25;
-            this.btnHighPrecison.Text = "High Precision";
-            this.btnHighPrecison.UseVisualStyleBackColor = true;
-            this.btnHighPrecison.Click += new System.EventHandler(this.btnHighPrecison_Click);
-            // 
             // btnReset
             // 
             this.btnReset.Location = new System.Drawing.Point(1068, 476);
@@ -609,7 +598,6 @@ namespace DGPattern
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtAzimuth);
             this.Controls.Add(this.btnReset);
-            this.Controls.Add(this.btnHighPrecison);
             this.Controls.Add(this.txtTheta);
             this.Controls.Add(this.txtTowers);
             this.Controls.Add(this.txtTower);
@@ -633,9 +621,9 @@ namespace DGPattern
             this.Controls.Add(this.PhaseScrollBar);
             this.Controls.Add(this.RatioScrollBar);
             this.Controls.Add(this.PolarChart);
+            this.Icon = global::DGPattern.Properties.Resources.DGPattern;
             this.Name = "Form1";
             this.Text = "DGPattern";
-            this.Icon = DGPattern.Properties.Resources.DGPattern;
             ((System.ComponentModel.ISupportInitialize)(this.PolarChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTowers)).EndInit();
             this.ResumeLayout(false);
@@ -668,7 +656,6 @@ namespace DGPattern
         private System.Windows.Forms.TextBox txtTower;
         private System.Windows.Forms.NumericUpDown txtTowers;
         private System.Windows.Forms.TextBox txtTheta;
-        private System.Windows.Forms.Button btnHighPrecison;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.TextBox txtAzimuth;
         private System.Windows.Forms.Label label8;

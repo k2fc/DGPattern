@@ -383,6 +383,10 @@ namespace DGPattern
         }
         private void CalculatePattern(bool highPrecision)
         {
+            
+        }
+        private void CalculatePattern()
+        {
             double maxy = 0;
             Series pattern = new Series("Pattern");
             Series zoomandenhance = new Series("Zoom and Enhance");
@@ -391,125 +395,63 @@ namespace DGPattern
             zoomandenhance.ChartType = SeriesChartType.Polar;
             verticalPattern.ChartType = SeriesChartType.Polar;
             
-            if (highPrecision)
+            double previousMagnitude = DirectionalResult(359.9, viewElevation);
+            bool increasing = (DirectionalResult(0, viewElevation) > previousMagnitude);
+            lstLobes.Items.Clear();
+            lstNulls.Items.Clear();
+            for (int i = 0; i < 3600; i++)
             {
-                double previousMagnitude = DirectionalResult(359.9, viewElevation);
-                bool increasing = (DirectionalResult(0, viewElevation) > previousMagnitude);
-                lstLobes.Items.Clear();
-                lstNulls.Items.Clear();
-                for (int i = 0; i < 3600; i++)
+                double azimuth = ((double)i) / 10;
+                double directionalmagnitude = DirectionalResult(azimuth, viewElevation);
+                if (directionalmagnitude > maxy)
                 {
-                    double azimuth = ((double)i)/10;
-                    double directionalmagnitude = DirectionalResult(azimuth, viewElevation);
-                    if (directionalmagnitude > maxy)
-                    {
-                        maxy = directionalmagnitude;
-                    }
-
-                    if (directionalmagnitude > previousMagnitude)
-                    {
-                        if (!increasing)
-                        {
-                            lstNulls.Items.Add((azimuth -.1) .ToString());
-                        }
-                        increasing = true;
-                    }
-                    else
-                    {
-                        if (increasing)
-                        {
-                            lstLobes.Items.Add((azimuth -.1).ToString());
-                        }
-                        increasing = false;
-                    }
-                    previousMagnitude = directionalmagnitude;
-                    DataPoint point = new DataPoint(azimuth, directionalmagnitude);
-                    pattern.Points.Add(point);
-                    DataPoint zoompoint = new DataPoint(azimuth, directionalmagnitude * 10);
-                    zoomandenhance.Points.Add(zoompoint);
-                    if (azimuth <= 90 && chkElevation.Checked)
-                    {
-                        double elevation = 90 - azimuth;
-                        DataPoint verticalpoint = new DataPoint(azimuth, DirectionalResult(viewAzimuth, elevation));
-                        verticalPattern.Points.Add(verticalpoint);
-                    }
-                    else if (azimuth >= 270 && chkElevation.Checked)
-                    {
-                        double elevation = azimuth - 270;
-                        DataPoint verticalpoint = new DataPoint(azimuth, DirectionalResult(viewAzimuth + 180, elevation));
-                        verticalPattern.Points.Add(verticalpoint);
-                    }
-
+                    maxy = directionalmagnitude;
                 }
-            }
-            else
-            {
-                double previousMagnitude = DirectionalResult(359, viewElevation);
-                bool increasing = (DirectionalResult(0, viewElevation) > previousMagnitude);
-                lstLobes.Items.Clear();
-                lstNulls.Items.Clear();
-                for (int i = 0; i < 360; i++)
+
+                if (directionalmagnitude > previousMagnitude)
                 {
-
-                    double azimuth = i;
-                    double directionalmagnitude = DirectionalResult(azimuth, viewElevation);
-                    if (directionalmagnitude > maxy)
+                    if (!increasing)
                     {
-                        maxy = directionalmagnitude;
-                        //txtAzimuth.Text = azimuth.ToString();
+                        lstNulls.Items.Add((azimuth - .1).ToString());
                     }
-
-                    if (directionalmagnitude > previousMagnitude)
-                    {
-                        if (!increasing)
-                        {
-                            lstNulls.Items.Add((azimuth - 1).ToString());
-                        }
-                        increasing = true;
-                    }
-                    else
-                    {
-                        if (increasing)
-                        {
-                            lstLobes.Items.Add((azimuth - 1).ToString());
-                        }
-                        increasing = false;
-                    }
-                    previousMagnitude = directionalmagnitude;
-                    DataPoint point = new DataPoint(azimuth, directionalmagnitude);
-                    pattern.Points.Add(point);
-                    DataPoint zoompoint = new DataPoint(azimuth, directionalmagnitude * 10);
-                    zoomandenhance.Points.Add(zoompoint);
-                    if (azimuth <= 90 && chkElevation.Checked) 
-                    {
-                        double elevation = 90 - azimuth;
-                        DataPoint verticalpoint = new DataPoint(azimuth, DirectionalResult(viewAzimuth, elevation));
-                        verticalPattern.Points.Add(verticalpoint);
-                    }
-                    else if (azimuth >= 270 && chkElevation.Checked)
-                    {
-                        double elevation = azimuth - 270;
-                        DataPoint verticalpoint = new DataPoint(azimuth, DirectionalResult(viewAzimuth + 180, elevation));
-                        verticalPattern.Points.Add(verticalpoint);
-                    }
+                    increasing = true;
                 }
+                else
+                {
+                    if (increasing)
+                    {
+                        lstLobes.Items.Add((azimuth - .1).ToString());
+                    }
+                    increasing = false;
+                }
+                previousMagnitude = directionalmagnitude;
+                DataPoint point = new DataPoint(azimuth, directionalmagnitude);
+                pattern.Points.Add(point);
+                DataPoint zoompoint = new DataPoint(azimuth, directionalmagnitude * 10);
+                zoomandenhance.Points.Add(zoompoint);
+                if (azimuth <= 90 && chkElevation.Checked)
+                {
+                    double elevation = 90 - azimuth;
+                    DataPoint verticalpoint = new DataPoint(azimuth, DirectionalResult(viewAzimuth, elevation));
+                    verticalPattern.Points.Add(verticalpoint);
+                }
+                else if (azimuth >= 270 && chkElevation.Checked)
+                {
+                    double elevation = azimuth - 270;
+                    DataPoint verticalpoint = new DataPoint(azimuth, DirectionalResult(viewAzimuth + 180, elevation));
+                    verticalPattern.Points.Add(verticalpoint);
+                }
+
             }
+                      
             
-            
+
+
             PolarChart.Series.Clear();
             PolarChart.Series.Add(pattern);
             PolarChart.Series.Add(zoomandenhance);
             PolarChart.Series.Add(verticalPattern);
             PolarChart.ChartAreas[0].AxisY.Maximum = maxy;
-        }
-        private void CalculatePattern()
-        {
-            CalculatePattern(false);
-        }
-
-        private void btnHighPrecison_Click(object sender, EventArgs e)
-        {
-            CalculatePattern(true);
         }
 
         private void btnReset_Click(object sender, EventArgs e)
