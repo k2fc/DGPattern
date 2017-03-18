@@ -31,6 +31,8 @@ namespace DGPattern
         double[] heightB;
         double[] heightC;
         double[] heightD;
+        double[] absolutespacing;
+        double[] absoluteorientation;
         int[] toploadSw;
         bool[] towerRefSw;
         double viewElevation;
@@ -48,6 +50,8 @@ namespace DGPattern
             phase = new double[100];
             spacing = new double[100];
             orientation = new double[100];
+            absolutespacing = new double[100];
+            absoluteorientation = new double[100];
             heightA = new double[100];
             heightB = new double[100];
             heightC = new double[100];
@@ -147,6 +151,9 @@ namespace DGPattern
                 Double scrollValue = double.Parse(txtSpacing.Text) * 10;
                 SpacingScrollBar.Value = (int)scrollValue;
                 spacing[tower] = double.Parse(txtSpacing.Text);
+                
+                
+
                 CalculatePattern();
             }
             catch
@@ -162,8 +169,9 @@ namespace DGPattern
                 Double scrollValue = double.Parse(txtOrientation.Text) * 10;
                 OrientationScrollBar.Value = (int)scrollValue;
                 orientation[tower] = double.Parse(txtOrientation.Text);
+
                 
-                
+
                 CalculatePattern();
             }
             catch
@@ -393,25 +401,10 @@ namespace DGPattern
             
             for (int i = 1; i <= numTowers; i++)
             {
-                double absolutespacing;
-                double absoluteorientation;
-
-                if (towerRefSw[i])
-                {
-                    Complex absolutelocation = Complex.Add(Complex.FromPolarCoordinates(spacing[i - 1], DegreeToRadian(orientation[i - 1])), 
-                        Complex.FromPolarCoordinates(spacing[i], DegreeToRadian(orientation[i])));
-                    absolutespacing = absolutelocation.Magnitude;
-                    absoluteorientation = absolutelocation.Phase;
-                }
-                else
-                {
-                    absolutespacing = spacing[i];
-                    absoluteorientation = DegreeToRadian(orientation[i]);
-                }
 
                 double magnitude = ratio[i] * FunctionOfTheta(toploadSw[i], elevation, heightA[i], heightB[i], heightC[i], heightD[i]);
                 double towerPhaseShift = DegreeToRadian(phase[i]);
-                double totalphase = (DegreeToRadian(absolutespacing) * Math.Cos(absoluteorientation - phi))+towerPhaseShift;
+                double totalphase = (DegreeToRadian(absolutespacing[i]) * Math.Cos(absoluteorientation[i] - phi))+towerPhaseShift;
                 Complex contribution = Complex.FromPolarCoordinates(magnitude, totalphase);
                 resultant = Complex.Add(resultant, contribution);
             }
@@ -423,6 +416,7 @@ namespace DGPattern
         }
         private void CalculatePattern()
         {
+            CalculateAbsoluteLocations();
             double maxy = 0;
             Series pattern = new Series("Pattern");
             Series zoomandenhance = new Series("Zoom and Enhance");
@@ -501,6 +495,8 @@ namespace DGPattern
                 phase[i] = 0;
                 spacing[i] = 0;
                 orientation[i] = 0;
+                absolutespacing[i] = 0;
+                absoluteorientation[i] = 0;
                 heightA[i] = 0;
                 heightB[i] = 0;
                 heightC[i] = 0;
@@ -632,5 +628,26 @@ namespace DGPattern
             towerRefSw[tower] = chkRefSw.Checked;
             CalculatePattern();
         }
+
+        private void CalculateAbsoluteLocations()
+        {
+            for (int i = 1; i <= numTowers; i++)
+            {
+                if (towerRefSw[i])
+                {
+                    Complex absolutelocation = Complex.Add(Complex.FromPolarCoordinates(absolutespacing[i - 1], absoluteorientation[i - 1]),
+                        Complex.FromPolarCoordinates(spacing[i], DegreeToRadian(orientation[i])));
+                    absolutespacing[i] = absolutelocation.Magnitude;
+                    absoluteorientation[i] = absolutelocation.Phase;
+                }
+                else
+                {
+                    absolutespacing[i] = spacing[i];
+                    absoluteorientation[i] = DegreeToRadian(orientation[i]);
+                }
+            }
+            
+        }
+
     }
 }
