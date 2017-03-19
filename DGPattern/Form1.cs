@@ -225,7 +225,8 @@ namespace DGPattern
             txtSpacing.Text = array.spacing[tower].ToString();
             txtOrientation.Text = array.orientation[tower].ToString();
             txtHeight.Text = array.heightA[tower].ToString();
-            
+            txtRatio.Focus();
+            txtRatio.SelectAll();
         }
 
         private void txtTower_TextChanged(object sender, EventArgs e)

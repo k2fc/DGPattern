@@ -42,10 +42,10 @@ namespace DGPattern
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.PolarChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.RatioScrollBar = new System.Windows.Forms.HScrollBar();
             this.PhaseScrollBar = new System.Windows.Forms.HScrollBar();
@@ -100,30 +100,30 @@ namespace DGPattern
             // PolarChart
             // 
             this.PolarChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea2.Name = "ChartArea1";
-            this.PolarChart.ChartAreas.Add(chartArea2);
-            legend2.Enabled = false;
-            legend2.Name = "Legend1";
-            this.PolarChart.Legends.Add(legend2);
+            chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            chartArea1.Name = "ChartArea1";
+            this.PolarChart.ChartAreas.Add(chartArea1);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.PolarChart.Legends.Add(legend1);
             this.PolarChart.Location = new System.Drawing.Point(12, 12);
             this.PolarChart.Name = "PolarChart";
             this.PolarChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Polar;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            series2.XValueMember = "0,1,2,3";
-            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            series2.YValueMembers = "1,1,.5,1";
-            series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            this.PolarChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Polar;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            series1.XValueMember = "0,1,2,3";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series1.YValueMembers = "1,1,.5,1";
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            this.PolarChart.Series.Add(series1);
             this.PolarChart.Size = new System.Drawing.Size(729, 747);
             this.PolarChart.SuppressExceptions = true;
             this.PolarChart.TabIndex = 0;
             this.PolarChart.Text = "chart1";
-            title2.Name = "Title1";
-            this.PolarChart.Titles.Add(title2);
+            title1.Name = "Title1";
+            this.PolarChart.Titles.Add(title1);
             this.PolarChart.Click += new System.EventHandler(this.chart1_Click);
             // 
             // RatioScrollBar
@@ -317,7 +317,7 @@ namespace DGPattern
             this.txtTower.Location = new System.Drawing.Point(1068, 76);
             this.txtTower.Name = "txtTower";
             this.txtTower.Size = new System.Drawing.Size(100, 20);
-            this.txtTower.TabIndex = 21;
+            this.txtTower.TabIndex = 6;
             this.txtTower.Text = "1";
             this.txtTower.TextChanged += new System.EventHandler(this.txtTower_TextChanged);
             // 
@@ -332,6 +332,7 @@ namespace DGPattern
             this.txtTowers.Name = "txtTowers";
             this.txtTowers.Size = new System.Drawing.Size(65, 20);
             this.txtTowers.TabIndex = 23;
+            this.txtTowers.TabStop = false;
             this.txtTowers.Value = new decimal(new int[] {
             1,
             0,
@@ -345,6 +346,7 @@ namespace DGPattern
             this.txtTheta.Name = "txtTheta";
             this.txtTheta.Size = new System.Drawing.Size(40, 20);
             this.txtTheta.TabIndex = 24;
+            this.txtTheta.TabStop = false;
             this.txtTheta.Text = "0";
             this.txtTheta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtTheta.TextChanged += new System.EventHandler(this.txtTheta_TextChanged);
@@ -355,6 +357,7 @@ namespace DGPattern
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(100, 23);
             this.btnReset.TabIndex = 26;
+            this.btnReset.TabStop = false;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
@@ -366,6 +369,7 @@ namespace DGPattern
             this.txtAzimuth.Name = "txtAzimuth";
             this.txtAzimuth.Size = new System.Drawing.Size(40, 20);
             this.txtAzimuth.TabIndex = 27;
+            this.txtAzimuth.TabStop = false;
             this.txtAzimuth.Text = "0";
             this.txtAzimuth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtAzimuth.TextChanged += new System.EventHandler(this.txtAzimuth_TextChanged);
@@ -407,6 +411,7 @@ namespace DGPattern
             this.chkElevation.Name = "chkElevation";
             this.chkElevation.Size = new System.Drawing.Size(121, 17);
             this.chkElevation.TabIndex = 31;
+            this.chkElevation.TabStop = false;
             this.chkElevation.Text = "Show Elevation Plot";
             this.chkElevation.UseVisualStyleBackColor = true;
             this.chkElevation.CheckedChanged += new System.EventHandler(this.chkElevation_CheckedChanged);
@@ -418,6 +423,7 @@ namespace DGPattern
             this.lstLobes.Name = "lstLobes";
             this.lstLobes.Size = new System.Drawing.Size(65, 95);
             this.lstLobes.TabIndex = 32;
+            this.lstLobes.TabStop = false;
             // 
             // lstNulls
             // 
@@ -426,6 +432,7 @@ namespace DGPattern
             this.lstNulls.Name = "lstNulls";
             this.lstNulls.Size = new System.Drawing.Size(65, 95);
             this.lstNulls.TabIndex = 33;
+            this.lstNulls.TabStop = false;
             // 
             // label9
             // 
