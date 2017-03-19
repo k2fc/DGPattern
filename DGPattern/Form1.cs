@@ -265,7 +265,7 @@ namespace DGPattern
             txtSpacing.Text = spacing[tower].ToString();
             txtOrientation.Text = orientation[tower].ToString();
             txtHeight.Text = heightA[tower].ToString();
-            
+            txtRatio.Focus();
         }
 
         private void txtTower_TextChanged(object sender, EventArgs e)
