@@ -14,7 +14,6 @@
 //    along with this program.If not, see<http://www.gnu.org/licenses/>.
 
 using System;
-using System.Numerics;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -23,42 +22,15 @@ namespace DGPattern
 {
     public partial class Form1 : Form
     {
-        double[] ratio;
-        double[] phase;
-        double[] spacing;
-        double[] orientation;
-        double[] heightA;
-        double[] heightB;
-        double[] heightC;
-        double[] heightD;
-        int[] toploadSw;
-        bool[] towerRefSw;
-        double viewElevation;
-        double viewAzimuth;
-        int numTowers;
+        DirectionalArray array = new DirectionalArray();
         int tower;
+        double viewAzimuth = 0;
+        double viewElevation = 0;
         
         public Form1()
         {
             InitializeComponent();
-            ratio = new double[100];
-            phase = new double[100];
-            spacing = new double[100];
-            orientation = new double[100];
-            heightA = new double[100];
-            heightB = new double[100];
-            heightC = new double[100];
-            heightD = new double[100];
-            toploadSw = new int[100];
-            towerRefSw = new bool[100];
-            viewElevation = 0;
-            viewAzimuth = 0;
-            numTowers = 1;
             tower = 1;
-            ratio[1] = 1;
-            heightA[1] = 90;
-            toploadSw[1] = 0;
-            towerRefSw[1] = false;
             chkRefSw.Enabled = false;
             CalculatePattern();
         }
@@ -111,7 +83,7 @@ namespace DGPattern
             {
                 Double scrollValue = double.Parse(txtRatio.Text) *100;
                 RatioScrollBar.Value = (int)scrollValue;
-                ratio[tower] = double.Parse(txtRatio.Text);
+                array.ratio[tower] = double.Parse(txtRatio.Text);
                 CalculatePattern();
             }
             catch
@@ -127,7 +99,7 @@ namespace DGPattern
             {
                 Double scrollValue = double.Parse(txtPhase.Text) * 10;
                 PhaseScrollBar.Value = (int)scrollValue;
-                phase[tower] = double.Parse(txtPhase.Text);
+                array.phase[tower] = double.Parse(txtPhase.Text);
                 CalculatePattern();
             }
             catch
@@ -142,10 +114,8 @@ namespace DGPattern
             {
                 Double scrollValue = double.Parse(txtSpacing.Text) * 10;
                 SpacingScrollBar.Value = (int)scrollValue;
-                spacing[tower] = double.Parse(txtSpacing.Text);
-                
-                
-
+                array.spacing[tower]= double.Parse(txtSpacing.Text);
+                lblAbsoluteLocation.Text = array.absoluteLocation(tower);
                 CalculatePattern();
             }
             catch
@@ -160,10 +130,8 @@ namespace DGPattern
             {
                 Double scrollValue = double.Parse(txtOrientation.Text) * 10;
                 OrientationScrollBar.Value = (int)scrollValue;
-                orientation[tower] = double.Parse(txtOrientation.Text);
-
-                
-
+                array.orientation[tower] = double.Parse(txtOrientation.Text);
+                lblAbsoluteLocation.Text = array.absoluteLocation(tower);
                 CalculatePattern();
             }
             catch
@@ -178,7 +146,7 @@ namespace DGPattern
             {
                 Double scrollValue = double.Parse(txtHeight.Text) * 10;
                 HeightScrollBar.Value = (int)scrollValue;
-                heightA[tower] = double.Parse(txtHeight.Text);
+                array.heightA[tower] = double.Parse(txtHeight.Text);
                 CalculatePattern();
             }
             catch
@@ -193,7 +161,7 @@ namespace DGPattern
             {
                 Double scrollValue = double.Parse(txtHeightB.Text) * 10;
                 HeightBScrollBar.Value = (int)scrollValue;
-                heightB[tower] = double.Parse(txtHeightB.Text);
+                array.heightB[tower] = double.Parse(txtHeightB.Text);
                 CalculatePattern();
             }
             catch
@@ -208,7 +176,7 @@ namespace DGPattern
             {
                 Double scrollValue = double.Parse(txtHeightC.Text) * 10;
                 HeightCScrollBar.Value = (int)scrollValue;
-                heightC[tower] = double.Parse(txtHeightC.Text);
+                array.heightC[tower] = double.Parse(txtHeightC.Text);
                 CalculatePattern();
             }
             catch
@@ -223,7 +191,7 @@ namespace DGPattern
             {
                 Double scrollValue = double.Parse(txtHeightD.Text) * 10;
                 HeightDScrollBar.Value = (int)scrollValue;
-                heightD[tower] = double.Parse(txtHeightD.Text);
+                array.heightD[tower] = double.Parse(txtHeightD.Text);
                 CalculatePattern();
             }
             catch
@@ -234,16 +202,16 @@ namespace DGPattern
 
         private void txtTowers_ValueChanged(object sender, EventArgs e)
         {
-            numTowers = (int)txtTowers.Value;
-            if (heightA[numTowers] < 1)
+            array.numTowers = (int)txtTowers.Value;
+            if (array.heightA[array.numTowers] < 1)
             {
-                heightA[numTowers] = heightA[1];
+                array.heightA[array.numTowers] = array.heightA[1];
             }
             TowerScrollBar.Maximum = (int)txtTowers.Value;
             
-            if (tower > numTowers)
+            if (tower > array.numTowers)
             {
-                txtTower.Text = numTowers.ToString();
+                txtTower.Text = array.numTowers.ToString();
             }
             CalculatePattern();
         }
@@ -252,11 +220,11 @@ namespace DGPattern
         {
             txtTower.Text = TowerScrollBar.Value.ToString();
             tower = TowerScrollBar.Value;
-            txtRatio.Text = ratio[tower].ToString();
-            txtPhase.Text = phase[tower].ToString();
-            txtSpacing.Text = spacing[tower].ToString();
-            txtOrientation.Text = orientation[tower].ToString();
-            txtHeight.Text = heightA[tower].ToString();
+            txtRatio.Text = array.ratio[tower].ToString();
+            txtPhase.Text = array.phase[tower].ToString();
+            txtSpacing.Text = array.spacing[tower].ToString();
+            txtOrientation.Text = array.orientation[tower].ToString();
+            txtHeight.Text = array.heightA[tower].ToString();
             
         }
 
@@ -267,18 +235,18 @@ namespace DGPattern
                 Double scrollValue = double.Parse(txtTower.Text);
                 TowerScrollBar.Value = (int)scrollValue;
                 tower = TowerScrollBar.Value;
-                txtRatio.Text = ratio[tower].ToString();
-                txtPhase.Text = phase[tower].ToString();
-                txtSpacing.Text = spacing[tower].ToString();
-                txtOrientation.Text = orientation[tower].ToString();
-                txtHeight.Text = heightA[tower].ToString();
-                txtHeightB.Text = heightB[tower].ToString();
-                txtHeightC.Text = heightC[tower].ToString();
-                txtHeightD.Text = heightD[tower].ToString();
-                radioButton0.Checked = (toploadSw[tower] == 0);
-                radioButton1.Checked = (toploadSw[tower] == 1);
-                radioButton2.Checked = (toploadSw[tower] == 2);
-                chkRefSw.Checked = towerRefSw[tower];
+                txtRatio.Text = array.ratio[tower].ToString();
+                txtPhase.Text = array.phase[tower].ToString();
+                txtSpacing.Text = array.spacing[tower].ToString();
+                txtOrientation.Text = array.orientation[tower].ToString();
+                txtHeight.Text = array.heightA[tower].ToString();
+                txtHeightB.Text = array.heightB[tower].ToString();
+                txtHeightC.Text = array.heightC[tower].ToString();
+                txtHeightD.Text = array.heightD[tower].ToString();
+                radioButton0.Checked = (array.toploadSw[tower] == 0);
+                radioButton1.Checked = (array.toploadSw[tower] == 1);
+                radioButton2.Checked = (array.toploadSw[tower] == 2);
+                chkRefSw.Checked = array.towerRefSw[tower];
                 if (tower == 1)
                 {
                     chkRefSw.Enabled = false;
@@ -287,6 +255,7 @@ namespace DGPattern
                 {
                     chkRefSw.Enabled = true;
                 }
+                lblAbsoluteLocation.Visible = (array.towerRefSw[tower]);
             }
             catch
             {
@@ -315,24 +284,10 @@ namespace DGPattern
         }
 
         
-        private double DegreeToRadian(double angle)
-        {
-            return Math.PI * angle / 180.0;
-        }
-
-        private double RadianToDegree (double angle)
-        {
-            return angle * (180 / Math.PI);
-        }
-
-        
-        private void CalculatePattern(bool highPrecision)
-        {
-            
-        }
         private void CalculatePattern()
         {
-            DirectionalArray array = new DirectionalArray(numTowers, ratio, phase, spacing, orientation, towerRefSw, toploadSw, heightA, heightB, heightC, heightD);
+            
+
             double maxy = 0;
             Series pattern = new Series("Pattern");
             Series zoomandenhance = new Series("Zoom and Enhance");
@@ -389,10 +344,7 @@ namespace DGPattern
                 }
 
             }
-                      
             
-
-
             PolarChart.Series.Clear();
             PolarChart.Series.Add(pattern);
             PolarChart.Series.Add(zoomandenhance);
@@ -402,24 +354,10 @@ namespace DGPattern
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            numTowers = 1;
+            
             txtTowers.Value = 1;
             tower = 1;
-            for (int i = 1; i<100; i++)
-            {
-                ratio[i] = 0;
-                phase[i] = 0;
-                spacing[i] = 0;
-                orientation[i] = 0;
-                heightA[i] = 0;
-                heightB[i] = 0;
-                heightC[i] = 0;
-                heightD[i] = 0;
-                toploadSw[i] = 0;
-                towerRefSw[i] = false;
-            }
-            ratio[1] = 1;
-            heightA[1] = 90;
+            array = new DirectionalArray();
             txtTower.Text = "1";
             txtRatio.Text = "1";
             txtPhase.Text = "0";
@@ -482,7 +420,7 @@ namespace DGPattern
         {
             if (radioButton2.Checked)
             {
-                toploadSw[tower] = 2;
+                array.toploadSw[tower] = 2;
 
                 lblHeightA.Text = "A";
                 
@@ -500,7 +438,7 @@ namespace DGPattern
             }
             else if (radioButton1.Checked)
             {
-                toploadSw[tower] = 1;
+                array.toploadSw[tower] = 1;
 
                 lblHeightA.Text = "A";
 
@@ -518,7 +456,7 @@ namespace DGPattern
             }
             else if (radioButton0.Checked)
             {
-                toploadSw[tower] = 0;
+                array.toploadSw[tower] = 0;
 
                 lblHeightA.Text = "Height";
 
@@ -539,11 +477,11 @@ namespace DGPattern
 
         private void chkRefSw_CheckedChanged(object sender, EventArgs e)
         {
-            towerRefSw[tower] = chkRefSw.Checked;
+            array.towerRefSw[tower] = chkRefSw.Checked;
+            lblAbsoluteLocation.Visible = array.towerRefSw[tower];
+            lblAbsoluteLocation.Text = array.absoluteLocation(tower);
             CalculatePattern();
         }
-
         
-
     }
 }
