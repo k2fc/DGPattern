@@ -256,6 +256,7 @@ namespace DGPattern
                     chkRefSw.Enabled = true;
                 }
                 lblAbsoluteLocation.Visible = (array.towerRefSw[tower]);
+                lblAbsoluteLocation.Text = array.absoluteLocation(tower);
             }
             catch
             {
