@@ -92,6 +92,7 @@ namespace DGPattern
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton0 = new System.Windows.Forms.RadioButton();
             this.chkRefSw = new System.Windows.Forms.CheckBox();
+            this.lblAbsoluteLocation = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PolarChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTowers)).BeginInit();
             this.SuspendLayout();
@@ -138,8 +139,8 @@ namespace DGPattern
             // PhaseScrollBar
             // 
             this.PhaseScrollBar.Location = new System.Drawing.Point(841, 161);
-            this.PhaseScrollBar.Maximum = 1800;
-            this.PhaseScrollBar.Minimum = -1800;
+            this.PhaseScrollBar.Maximum = 3600;
+            this.PhaseScrollBar.Minimum = -3600;
             this.PhaseScrollBar.Name = "PhaseScrollBar";
             this.PhaseScrollBar.Size = new System.Drawing.Size(223, 17);
             this.PhaseScrollBar.TabIndex = 2;
@@ -583,11 +584,22 @@ namespace DGPattern
             this.chkRefSw.UseVisualStyleBackColor = true;
             this.chkRefSw.CheckedChanged += new System.EventHandler(this.chkRefSw_CheckedChanged);
             // 
+            // lblAbsoluteLocation
+            // 
+            this.lblAbsoluteLocation.AutoSize = true;
+            this.lblAbsoluteLocation.Location = new System.Drawing.Point(843, 199);
+            this.lblAbsoluteLocation.Name = "lblAbsoluteLocation";
+            this.lblAbsoluteLocation.Size = new System.Drawing.Size(99, 13);
+            this.lblAbsoluteLocation.TabIndex = 48;
+            this.lblAbsoluteLocation.Text = "lblAbsoluteLocation";
+            this.lblAbsoluteLocation.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 764);
+            this.Controls.Add(this.lblAbsoluteLocation);
             this.Controls.Add(this.chkRefSw);
             this.Controls.Add(this.radioButton0);
             this.Controls.Add(this.radioButton1);
@@ -692,6 +704,7 @@ namespace DGPattern
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton0;
         private System.Windows.Forms.CheckBox chkRefSw;
+        private System.Windows.Forms.Label lblAbsoluteLocation;
     }
 }
 
